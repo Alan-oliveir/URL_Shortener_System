@@ -168,32 +168,6 @@ mvn clean package
 - **High Availability**: Disponibilidade garantida pela AWS
 - **Microserviços**: Serviços independentes e especializados
 
-## Demonstração de Habilidades
-
-Este projeto demonstra conhecimentos em:
-
-### **Backend Development**
-- Java 17 e programação orientada a objetos
-- Arquitetura de microserviços
-- APIs REST e códigos de status HTTP
-- Tratamento de exceções e validação
-
-### **Cloud Computing (AWS)**
-- AWS Lambda (Function as a Service)
-- Amazon S3 (Object Storage)
-- AWS API Gateway
-- IAM (Identity and Access Management)
-
-### **DevOps & Build**
-- Maven para gerenciamento de dependências
-- Build automation e packaging
-- Deployment em ambiente cloud
-
-### **Qualidade de Código**
-- Lombok para código limpo
-- Separação de responsabilidades
-- Tratamento robusto de erros
-
 ## Melhorias Futuras
 
 - [ ] **Analytics**: Dashboard de métricas de uso
@@ -203,18 +177,17 @@ Este projeto demonstra conhecimentos em:
 - [ ] **Testing**: Testes unitários e de integração
 - [ ] **UI**: Interface web para criação de URLs
 
-## Desenvolvedor
-
-Desenvolvido por [Seu Nome] durante evento de programação da Rocketseat.
-
-**Contato**: [seu-email@exemplo.com]
-**LinkedIn**: [seu-linkedin]
-**GitHub**: [seu-github]
+---
 
 ## Licença
 
 Este projeto está sob a licença MIT. Consulte os arquivos LICENSE em cada subprojeto para mais detalhes.
 
----
+## Contato
 
-> **💡 Nota para Recrutadores**: Este projeto demonstra a capacidade de desenvolver soluções completas utilizando arquitetura serverless moderna, aplicando boas práticas de desenvolvimento e integração com serviços cloud da AWS.
+Desenvolvido por Alan de O. Gonçalves baseado em projeto feito durante evento de programação da Rocketseat.
+
+[![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Alan-oliveir)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/alan-ogoncalves)
+
+
