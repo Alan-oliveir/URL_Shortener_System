@@ -327,8 +327,3 @@ Se após seguir este guia o problema persistir:
    - [AWS Lambda Troubleshooting](https://docs.aws.amazon.com/lambda/latest/dg/troubleshooting.html)
    - [S3 Error Codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)
    - [API Gateway Issues](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-troubleshooting.html)
-
----
-
-!!! tip "Dica Pro"
-    Mantenha sempre logs detalhados habilitados durante desenvolvimento. Em produção, ajuste o nível de log conforme necessário para performance.
