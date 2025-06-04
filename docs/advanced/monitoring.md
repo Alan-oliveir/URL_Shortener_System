@@ -412,8 +412,3 @@ public Map<String, Object> healthCheck(Map<String, Object> input, Context contex
 - [ ] Lambda throttling
 - [ ] S3 errors
 - [ ] API Gateway 5XX errors
-
----
-
-!!! tip "Próximos Passos"
-    Configure primeiro os alarmes críticos e depois implemente gradualmente as métricas customizadas conforme a necessidade do negócio.
