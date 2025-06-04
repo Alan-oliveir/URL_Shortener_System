@@ -2,7 +2,7 @@
 
 O **Redirect URL Service** é responsável por resolver códigos de URLs encurtadas e redirecionar os usuários para as URLs originais correspondentes.
 
-## 📋 Overview
+## Overview
 
 | Propriedade | Valor |
 |-------------|-------|
@@ -12,7 +12,7 @@ O **Redirect URL Service** é responsável por resolver códigos de URLs encurta
 | **Timeout** | 30 segundos |
 | **Retries** | Não aplicável (GET) |
 
-## 🔗 Endpoint
+## Endpoint
 
 ```
 GET /{shortCode}
@@ -20,7 +20,7 @@ GET /{shortCode}
 
 Onde `{shortCode}` é o código de 8 caracteres retornado pelo [Create URL Service](create-url.md).
 
-## 📤 Request
+## Request
 
 ### URL Parameters
 
@@ -61,11 +61,11 @@ Nenhum header específico é necessário para esta requisição.
     print(f"URL final: {response.url}")
     ```
 
-## 📥 Response
+## Response
 
 ### Cenários de Resposta
 
-#### ✅ URL Válida (Sucesso)
+#### URL Válida (Sucesso)
 
 **Status Code**: `302 Found`
 
@@ -79,7 +79,7 @@ Date: Wed, 04 Jun 2025 10:30:00 GMT
 !!! success "Redirecionamento Automático"
     O navegador automaticamente seguirá o redirecionamento para a URL original.
 
-#### ⏰ URL Expirada
+#### URL Expirada
 
 **Status Code**: `410 Gone`
 
@@ -95,7 +95,7 @@ This URL has expired.
 !!! warning "URL Expirada"
     A URL encurtada ultrapassou seu tempo de vida útil definido na criação.
 
-#### ❌ URL Não Encontrada
+#### URL Não Encontrada
 
 **Status Code**: `500 Internal Server Error`
 
@@ -113,7 +113,7 @@ Date: Wed, 04 Jun 2025 10:30:00 GMT
 !!! danger "Código Inválido"
     O código fornecido não existe no sistema ou é inválido.
 
-## 📊 Status Codes
+## Status Codes
 
 | Status | Descrição | Cenário |
 |--------|-----------|---------|
@@ -121,7 +121,7 @@ Date: Wed, 04 Jun 2025 10:30:00 GMT
 | `410` | **Gone** | URL expirou - não está mais disponível |
 | `500` | **Internal Server Error** | Erro interno ou código não encontrado |
 
-## 🔄 Fluxo de Redirecionamento
+## Fluxo de Redirecionamento
 
 ```mermaid
 sequenceDiagram
@@ -152,7 +152,7 @@ sequenceDiagram
     end
 ```
 
-## ⚙️ Validação de Expiração
+## Validação de Expiração
 
 O serviço verifica automaticamente se a URL ainda está válida comparando:
 
@@ -166,7 +166,7 @@ if (urlData.getExpirationTime() < currentTimeInSeconds) {
 !!! info "Timestamp Unix"
     O tempo de expiração é armazenado como timestamp Unix (segundos desde 01/01/1970).
 
-## 🛠️ Exemplos Práticos
+## Exemplos Práticos
 
 ### Teste de URL Válida
 
@@ -210,7 +210,7 @@ curl -I https://api.exemplo.com/invalid0
 # HTTP/1.1 500 Internal Server Error
 ```
 
-## 🔍 Monitoramento
+## Monitoramento
 
 ### Métricas Importantes
 
@@ -233,7 +233,7 @@ curl -I https://api.exemplo.com/invalid0
 }
 ```
 
-## 🚀 Performance
+## Performance
 
 ### Otimizações Implementadas
 
@@ -251,7 +251,7 @@ curl -I https://api.exemplo.com/invalid0
 | **S3 Fetch** | ~20ms |
 | **Total Response Time** | ~70ms |
 
-## 🔗 Integração
+## Integração
 
 Este serviço trabalha em conjunto com o [Create URL Service](create-url.md):
 
@@ -260,7 +260,7 @@ Este serviço trabalha em conjunto com o [Create URL Service](create-url.md):
 
 Para mais detalhes sobre a arquitetura completa, consulte [System Overview](../architecture.md).
 
-## ❓ Troubleshooting
+## Troubleshooting
 
 ### Problemas Comuns
 
