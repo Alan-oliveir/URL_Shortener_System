@@ -1,0 +1,6 @@
+[submodule "create-url-service"]
+	path = create-url-service
+	url = https://github.com/Alan-oliveir/CreateUrlLambda.git
+[submodule "redirect-url-service"]
+	path = redirect-url-service
+	url = https://github.com/Alan-oliveir/RedirectUrlShortner.git
