@@ -10,12 +10,12 @@ Sistema completo de encurtamento de URLs desenvolvido com arquitetura serverless
 ## Arquitetura do Sistema
 
 ```
-┌─────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Cliente   │    │   API Gateway   │    │   AWS Lambda    │
-│             │───▶│                 │───▶│                 │
-│ Navegador/  │    │ - POST /create  │    │ CreateUrl       │
-│ App         │    │ - GET /{code}   │    │ RedirectUrl     │
-└─────────────┘    └─────────────────┘    └─────────────────┘
+┌─────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   Cliente   │     │   API Gateway   │     │   AWS Lambda    │
+│             │───▶|                  │───▶│                 │
+│ Navegador/  │     │ - POST /create  │     │  CreateUrl      │
+│ App         │     │ - GET /{code}   │     │  RedirectUrl    │
+└─────────────┘     └─────────────────┘     └─────────────────┘
                                                     │
                                                     ▼
                                           ┌─────────────────┐
