@@ -7,7 +7,7 @@ Bem-vindo à documentação completa do **URL Shortener System** - uma solução
 Um encurtador de URLs moderno construído com arquitetura de microserviços serverless, demonstrando as melhores práticas de desenvolvimento cloud-native.
 
 ```mermaid
-graph LR
+graph TD
     A[Cliente] --> B[API Gateway]
     B --> C[Create URL Lambda]
     B --> D[Redirect Lambda]
@@ -19,20 +19,20 @@ graph LR
 ## Quick Start
 
 === "Criar URL"
-    ```bash
-    curl -X POST https://api.exemplo.com/create \
-      -H "Content-Type: application/json" \
-      -d '{
-        "originalUrl": "https://exemplo.com/artigo-longo",
-        "expirationTime": "1672531200"
-      }'
-    ```
+```bash
+curl -X POST https://api.exemplo.com/create \
+  -H "Content-Type: application/json" \
+  -d '{
+    "originalUrl": "https://exemplo.com/artigo-longo",
+    "expirationTime": "1672531200"
+  }'
+```
 
 === "Usar URL"
-    ```bash
-    curl -I https://api.exemplo.com/a1b2c3d4
-    # → 302 Redirect para URL original
-    ```
+```bash
+curl -I https://api.exemplo.com/a1b2c3d4
+# → 302 Redirect para URL original
+```
 
 ## Arquitetura
 
@@ -45,52 +45,38 @@ graph LR
 
 ## Navegação Rápida
 
-<div class="grid cards" markdown>
+### Getting Started
+Configure e execute o sistema em minutos
 
--   :material-rocket-launch:{ .lg .middle } **Getting Started**
-    
-    ---
-    
-    Configure e execute o sistema em minutos
-    
-    [:octicons-arrow-right-24: Quick Start](getting-started.md)
+[Quick Start](getting-started.md){ .md-button .md-button--primary }
 
--   :material-cloud:{ .lg .middle } **Deployment**
-    
-    ---
-    
-    Deploy completo na AWS com todas as configurações
-    
-    [:octicons-arrow-right-24: AWS Setup](deployment/aws-setup.md)
+### Deployment
+Deploy completo na AWS com todas as configurações
 
--   :material-api:{ .lg .middle } **API Reference**
-    
-    ---
-    
-    Documentação completa das APIs disponíveis
-    
-    [:octicons-arrow-right-24: APIs](api/create-url.md)
+[AWS Setup](deployment/aws-setup.md){ .md-button .md-button--primary }
 
--   :material-monitor:{ .lg .middle } **Monitoring**
-    
-    ---
-    
-    Logs, métricas e troubleshooting
-    
-    [:octicons-arrow-right-24: Monitoring](advanced/monitoring.md)
+### API Reference
+Documentação completa das APIs disponíveis
 
-</div>
+[APIs](api/create-url.md){ .md-button .md-button--primary }
+
+### Monitoring
+Logs, métricas e troubleshooting
+
+[Monitoring](advanced/monitoring.md){ .md-button .md-button--primary }
+
+---
 
 ## Destaques Técnicos
 
 !!! success "Arquitetura Serverless"
-    Zero infraestrutura para gerenciar, escalabilidade automática e pay-per-use.
+Zero infraestrutura para gerenciar, escalabilidade automática e pay-per-use.
 
 !!! info "Microserviços"
-    Dois serviços independentes: criação e redirecionamento de URLs.
+Dois serviços independentes: criação e redirecionamento de URLs.
 
 !!! tip "Tecnologias Modernas"
-    Java 17, AWS Lambda, S3, API Gateway, Maven e Jackson.
+Java 17, AWS Lambda, S3, API Gateway, Maven e Jackson.
 
 ## Contribuindo
 

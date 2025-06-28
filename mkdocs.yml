@@ -1,0 +1,89 @@
+site_name: URL Shortener System
+site_description: Documentação completa do sistema serverless de encurtamento de URLs com Java e AWS
+site_author: Alan de O. Gonçalves
+repo_url: https://github.com/Alan-oliveir/URL_Shortener_System
+repo_name: GitHub
+
+nav:
+  - Início: index.md
+  - Guia Rápido: getting-started.md
+  - Arquitetura: architecture.md
+  - API Reference:
+      - Criar URL: api/create-url.md
+      - Redirecionar URL: api/redirect-url.md
+  - Deployment:
+      - AWS Setup: deployment/aws-setup.md
+      - Permissões IAM: deployment/iam-permissions.md
+  - Avançado:
+      - Monitoramento: advanced/monitoring.md
+      - Troubleshooting: advanced/troubleshooting.md
+
+theme:
+  name: material
+  language: pt
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: blue
+  features:
+    # Navegação
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.sections
+    - navigation.expand
+    - navigation.instant
+    - navigation.tracking
+    - navigation.footer
+    - navigation.indexes
+    - navigation.path
+    - navigation.prune
+
+    # Tabela de Conteúdo
+    - toc.integrate
+    - toc.follow
+    - toc.sticky
+
+    # Conteúdo
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+
+    # Busca
+    - search.suggest
+    - search.highlight
+    - search.share
+
+    # Interface
+    - header.autohide
+    - announce.dismiss
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - pymdownx.tasklist
+  - toc:
+      permalink: true
+  - tables
+  - attr_list
+  - md_in_html
+  - footnotes
+
+plugins:
+  - search:
+      lang: pt
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Alan-oliveir
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/alan-ogoncalves

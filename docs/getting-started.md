@@ -117,30 +117,31 @@ Crie uma role IAM com as seguintes permissões:
 #### Create URL Lambda
 
 1. **Acessar AWS Lambda Console**
+
 2. **Criar Nova Função**
-   - Nome: `url-shortener-create`
-   - Runtime: `Java 17`
-   - Arquitetura: `x86_64`
+    - Nome: `url-shortener-create`
+    - Runtime: `Java 17`
+    - Arquitetura: `x86_64`
 
 3. **Upload do Código**
-   - Fazer upload do JAR: `CreateUrlLambda-1.0-SNAPSHOT.jar`
-   - Handler: `com.rocketseat.createUrlShortner.Main::handleRequest`
+    - Fazer upload do JAR: `CreateUrlLambda-1.0-SNAPSHOT.jar`
+    - Handler: `com.rocketseat.createUrlShortner.Main::handleRequest`
 
 4. **Configurações**
-   - Timeout: `30 segundos`
-   - Memória: `256 MB`
-   - Variáveis de ambiente (se necessário)
+    - Timeout: `30 segundos`
+    - Memória: `256 MB`
+    - Variáveis de ambiente (se necessário)
 
 #### Redirect URL Lambda
 
 1. **Criar Nova Função**
-   - Nome: `url-shortener-redirect`
-   - Runtime: `Java 17`
-   - Arquitetura: `x86_64`
+    - Nome: `url-shortener-redirect`
+    - Runtime: `Java 17`
+    - Arquitetura: `x86_64`
 
 2. **Upload do Código**
-   - Fazer upload do JAR: `RedirectUrlShortner-1.0-SNAPSHOT.jar`
-   - Handler: `com.rocketseat.redirectUrlShortner.Main::handleRequest`
+    - Fazer upload do JAR: `RedirectUrlShortner-1.0-SNAPSHOT.jar`
+    - Handler: `com.rocketseat.redirectUrlShortner.Main::handleRequest`  
 
 ### 2. Configurar API Gateway
 
@@ -246,11 +247,12 @@ location: https://github.com/seu-usuario/url-shortener-system
 
 ### CloudWatch Logs
 
-Acesse os logs das suas funções em:
-- **Create URL**: `/aws/lambda/url-shortener-create`
-- **Redirect URL**: `/aws/lambda/url-shortener-redirect`
+Acesse os logs das suas funções em: 
 
-### Métricas Importantes
+- **Create URL**: `/aws/lambda/url-shortener-create`  
+- **Redirect URL**: `/aws/lambda/url-shortener-redirect`  
+
+Métricas Importantes:
 
 - **Invocations**: Número de execuções
 - **Duration**: Tempo de execução
@@ -263,7 +265,7 @@ Agora que o sistema está funcionando, você pode:
 
 1. **Explorar a [Arquitetura](architecture.md)** - Entender como tudo funciona
 2. **Consultar a [API Reference](api/create-url.md)** - Documentação completa das APIs
-3. **Configurar [Monitoramento](../advanced/monitoring.md)** - Logs e alertas avançados
+3. **Configurar [Monitoramento](advanced/monitoring.md)** - Logs e alertas avançados
 
 ---
 

@@ -312,18 +312,21 @@ fi
 
 Se após seguir este guia o problema persistir:
 
-1. **Colete informações**:
-   - Logs do CloudWatch
-   - Código de erro específico
-   - Payload da requisição
-   - Timestamp do erro
+**Colete informações**:
 
-2. **Verifique**:
-   - Status dos serviços AWS
-   - Quotas e limites da conta
-   - Configurações de rede/VPC
+- Logs do CloudWatch  
+- Código de erro específico  
+- Payload da requisição  
+- Timestamp do erro  
 
-3. **Recursos adicionais**:
-   - [AWS Lambda Troubleshooting](https://docs.aws.amazon.com/lambda/latest/dg/troubleshooting.html)
-   - [S3 Error Codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)
-   - [API Gateway Issues](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-troubleshooting.html)
+**Verifique**:  
+
+- Status dos serviços AWS  
+- Quotas e limites da conta  
+- Configurações de rede/VPC  
+
+**Recursos adicionais**:  
+
+- [AWS Lambda Troubleshooting](https://docs.aws.amazon.com/lambda/latest/dg/troubleshooting.html)  
+- [S3 Error Codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)  
+- [API Gateway Issues](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-troubleshooting.html)  

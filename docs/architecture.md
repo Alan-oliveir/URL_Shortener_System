@@ -33,7 +33,7 @@ graph TB
     
     C -->|HTTP Requests| AG
     AG -->|POST /create| L1
-    AG -->|GET /{code}| L2
+    AG -->|GET /code| L2
     L1 -->|Store URL Data| S3
     L2 -->|Retrieve URL Data| S3
     L1 -.->|Permissions| IAM
@@ -80,11 +80,12 @@ Configuration:
     - API keys (opcional)
 ```
 
-**Benefícios**:
-- Roteamento centralizado
-- Throttling automático
-- Logs de requisições
-- Transformação de dados
+**Benefícios**:  
+
+- Roteamento centralizado  
+- Throttling automático  
+- Logs de requisições  
+- Transformação de dados  
 
 ### Create URL Lambda
 **Responsabilidade**: Processar criação de URLs encurtadas
@@ -102,11 +103,12 @@ flowchart TD
     H -->|Erro| J[Retornar Erro 500]
 ```
 
-**Características Técnicas**:
-- **Runtime**: Java 17
-- **Memory**: 512 MB (recomendado)
-- **Timeout**: 30 segundos
-- **Handler**: `com.rocketseat.createUrlShortner.Main::handleRequest`
+**Características Técnicas**:  
+
+- **Runtime**: Java 17  
+- **Memory**: 512 MB (recomendado)  
+- **Timeout**: 30 segundos  
+- **Handler**: `com.rocketseat.createUrlShortner.Main::handleRequest`  
 
 ### Redirect URL Lambda
 **Responsabilidade**: Resolver códigos e redirecionar usuários
@@ -123,11 +125,12 @@ flowchart TD
     G -->|Não| I[Retornar 302 Redirect]
 ```
 
-**Características Técnicas**:
-- **Runtime**: Java 17
-- **Memory**: 256 MB (suficiente)
-- **Timeout**: 15 segundos
-- **Handler**: `com.rocketseat.redirectUrlShortner.Main::handleRequest`
+**Características Técnicas**:  
+
+- **Runtime**: Java 17  
+- **Memory**: 256 MB (suficiente)  
+- **Timeout**: 15 segundos  
+- **Handler**: `com.rocketseat.redirectUrlShortner.Main::handleRequest`  
 
 ### Amazon S3
 **Responsabilidade**: Armazenamento persistente de dados das URLs
@@ -148,11 +151,12 @@ Object Structure:
     }
 ```
 
-**Benefícios**:
-- Durabilidade de 99.999999999%
-- Escalabilidade ilimitada
-- Baixo custo por GB
-- Integração nativa com Lambda
+**Benefícios**:  
+
+- Durabilidade de 99.999999999%  
+- Escalabilidade ilimitada  
+- Baixo custo por GB  
+- Integração nativa com Lambda  
 
 ## Fluxos de Dados
 
@@ -166,7 +170,7 @@ sequenceDiagram
     participant S3 as Amazon S3
     
     C->>AG: POST /create
-    Note over C,AG: {"originalUrl": "...", "expirationTime": "..."}
+    Note over C,AG: originalUrl + expirationTime
     
     AG->>L1: Invoke Lambda
     L1->>L1: Parse JSON
@@ -174,10 +178,10 @@ sequenceDiagram
     L1->>L1: Create UrlData object
     
     L1->>S3: PutObject
-    Note over L1,S3: Key: code.json<br/>Body: UrlData JSON
+    Note over L1,S3: Key: code.json
     
     S3-->>L1: Success
-    L1-->>AG: {"code": "a1b2c3d4"}
+    L1-->>AG: Return code
     AG-->>C: 200 OK + response
 ```
 
@@ -289,18 +293,21 @@ sequenceDiagram
 
 ### Otimizações Implementadas
 
-1. **Cold Start Mitigation**
-   - Uso de Lombok para reduzir reflection
-   - Jackson ObjectMapper reutilizado
-   - Dependências mínimas
+**Cold Start Mitigation:** 
 
-2. **Memory Optimization**
-   - Create Lambda: 512MB (processamento JSON)
-   - Redirect Lambda: 256MB (operação mais simples)
+- Uso de Lombok para reduzir reflection  
+- Jackson ObjectMapper reutilizado  
+- Dependências mínimas  
 
-3. **S3 Performance**
-   - Naming strategy com UUID evita hot-spotting
-   - Objetos pequenos (< 1KB) para baixa latência
+**Memory Optimization:**
+
+- Create Lambda: 512MB (processamento JSON)  
+- Redirect Lambda: 256MB (operação mais simples)  
+
+**S3 Performance:**  
+
+- Naming strategy com UUID evita hot-spotting  
+- Objetos pequenos (< 1KB) para baixa latência  
 
 ## Monitoramento e Observabilidade
 

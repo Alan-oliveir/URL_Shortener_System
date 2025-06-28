@@ -315,25 +315,29 @@ public class MetricsHelper {
 
 ### Problema: Alta Latência
 
-**Sintomas:**
-- Duration > 5000ms
+**Sintomas:**  
+
+- Duration > 5000ms  
 - Timeouts frequentes
 
-**Investigação:**
-1. Verificar logs de performance
-2. Analisar cold starts
-3. Verificar latência do S3
+**Investigação:**  
 
-**Soluções:**
-- Provisioned Concurrency para evitar cold starts
-- Otimizar código Java
-- Usar S3 Transfer Acceleration
+1. Verificar logs de performance  
+2. Analisar cold starts  
+3. Verificar latência do S3  
+
+**Soluções:**  
+
+- Provisioned Concurrency para evitar cold starts  
+- Otimizar código Java  
+- Usar S3 Transfer Acceleration  
 
 ### Problema: Errors 5XX
 
-**Sintomas:**
-- Errors > 1% das invocações
-- Falhas de acesso ao S3
+**Sintomas:**  
+
+- Errors > 1% das invocações  
+- Falhas de acesso ao S3  
 
 **Investigação:**
 ```sql
@@ -342,25 +346,29 @@ fields @timestamp, @message
 | stats count() by bin(5m)
 ```
 
-**Soluções:**
-- Verificar permissões IAM
-- Implementar retry automático
-- Validar configuração do S3
+**Soluções:**  
+
+- Verificar permissões IAM  
+- Implementar retry automático  
+- Validar configuração do S3  
 
 ### Problema: Throttling
 
-**Sintomas:**
-- Throttles > 0
-- 429 Too Many Requests
+**Sintomas:**  
 
-**Investigação:**
-- Verificar limites de concorrência
-- Analisar padrões de tráfego
+- Throttles > 0  
+- 429 Too Many Requests  
 
-**Soluções:**
-- Aumentar Reserved Concurrency
-- Implementar backoff exponencial
-- Distribuir carga temporalmente
+**Investigação:**  
+
+- Verificar limites de concorrência  
+- Analisar padrões de tráfego  
+
+**Soluções:**  
+
+- Aumentar Reserved Concurrency  
+- Implementar backoff exponencial  
+- Distribuir carga temporalmente  
 
 ## Monitoramento Mobile/Web
 

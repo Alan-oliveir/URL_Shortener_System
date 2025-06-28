@@ -424,7 +424,6 @@ Após completar o setup:
 
 1. **[Configurar permissões IAM detalhadas](iam-permissions.md)**
 2. **[Implementar monitoramento](../advanced/monitoring.md)**
-3. **[Configurar CI/CD](cicd.md)**
 
 ## Troubleshooting
 
