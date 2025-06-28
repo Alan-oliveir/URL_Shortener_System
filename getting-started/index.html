@@ -1,0 +1,1365 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentação completa do sistema serverless de encurtamento de URLs com Java e AWS">
+      
+      
+        <meta name="author" content="Alan de O. Gonçalves">
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../architecture/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Guia Rápido - URL Shortener System</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#getting-started" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href=".." title="URL Shortener System" class="md-header__button md-logo" aria-label="URL Shortener System" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            URL Shortener System
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Guia Rápido
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartilhar" aria-label="Compartilhar" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Alan-oliveir/URL_Shortener_System" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Abas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Início
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Guia Rápido
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../architecture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Arquitetura
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../api/create-url/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../deployment/aws-setup/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Deployment
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../advanced/monitoring/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Avançado
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="URL Shortener System" class="md-nav__button md-logo" aria-label="URL Shortener System" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    URL Shortener System
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Alan-oliveir/URL_Shortener_System" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Guia Rápido
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Guia Rápido
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pre-requisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pré-requisitos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pré-requisitos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ferramentas-necessarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ferramentas Necessárias
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conta-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conta AWS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracao-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuração Rápida
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuração Rápida">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-clonar-o-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Clonar o Projeto
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-configurar-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Configurar AWS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Configurar AWS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#criar-bucket-s3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criar Bucket S3
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurar-permissoes-iam" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurar Permissões IAM
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-build-dos-microservicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Build dos Microserviços
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-na-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploy na AWS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy na AWS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-deploy-das-funcoes-lambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Deploy das Funções Lambda
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Deploy das Funções Lambda">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-url-lambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create URL Lambda
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redirect-url-lambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      Redirect URL Lambda
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-configurar-api-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Configurar API Gateway
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Configurar API Gateway">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#criar-api-rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criar API REST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurar-rotas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurar Rotas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-deploy-da-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Deploy da API
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando-o-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testando o Sistema
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testando o Sistema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-criar-url-encurtada" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Criar URL Encurtada
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-testar-redirecionamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Testar Redirecionamento
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolucao-de-problemas-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resolução de Problemas Comuns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resolução de Problemas Comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lambda-nao-esta-executando" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lambda não está executando
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bucket-s3-nao-encontrado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bucket S3 não encontrado
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-gateway-retorna-erro-500" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Gateway retorna erro 500
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoramento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoramento
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Monitoramento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudwatch-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      CloudWatch Logs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-passos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Próximos Passos
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arquitetura
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../api/create-url/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../deployment/aws-setup/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../advanced/monitoring/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Avançado
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h1>
+<p>Este guia vai te ajudar a configurar e executar o URL Shortener System do zero. Em poucos minutos você terá um sistema completo de encurtamento de URLs funcionando na AWS.</p>
+<h2 id="pre-requisitos">Pré-requisitos<a class="headerlink" href="#pre-requisitos" title="Permanent link">&para;</a></h2>
+<p>Antes de começar, certifique-se de ter os seguintes requisitos:</p>
+<h3 id="ferramentas-necessarias">Ferramentas Necessárias<a class="headerlink" href="#ferramentas-necessarias" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Java 17+</strong> - <a href="https://adoptium.net/">Download aqui</a></li>
+<li><strong>Maven 3.6+</strong> - <a href="https://maven.apache.org/install.html">Instalação</a></li>
+<li><strong>AWS CLI</strong> - <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">Configuração</a></li>
+<li><strong>Git</strong> - Para clonar os repositórios</li>
+</ul>
+<h3 id="conta-aws">Conta AWS<a class="headerlink" href="#conta-aws" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Importante</p>
+<p>Você precisará de uma conta AWS ativa. Alguns serviços podem gerar custos mínimos.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Verificar Java</label><label for="__tabbed_1_2">Verificar Maven</label><label for="__tabbed_1_3">Verificar AWS CLI</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>--version
+<span class="c1"># Deve retornar Java 17 ou superior</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>--version
+<span class="c1"># Deve retornar Maven 3.6 ou superior</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>aws<span class="w"> </span>--version
+<span class="c1"># Configure com: aws configure</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="configuracao-rapida">Configuração Rápida<a class="headerlink" href="#configuracao-rapida" title="Permanent link">&para;</a></h2>
+<h3 id="1-clonar-o-projeto">1. Clonar o Projeto<a class="headerlink" href="#1-clonar-o-projeto" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Clonar repositório principal</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/seu-usuario/url-shortener-system.git
+<span class="nb">cd</span><span class="w"> </span>url-shortener-system
+
+<span class="c1"># Inicializar submodules</span>
+git<span class="w"> </span>submodule<span class="w"> </span>init
+git<span class="w"> </span>submodule<span class="w"> </span>update
+</code></pre></div>
+<h3 id="2-configurar-aws">2. Configurar AWS<a class="headerlink" href="#2-configurar-aws" title="Permanent link">&para;</a></h3>
+<h4 id="criar-bucket-s3">Criar Bucket S3<a class="headerlink" href="#criar-bucket-s3" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Criar bucket (nome deve ser único globalmente)</span>
+aws<span class="w"> </span>s3<span class="w"> </span>mb<span class="w"> </span>s3://aws-url-shortner-app-SEU-NOME
+
+<span class="c1"># Verificar se foi criado</span>
+aws<span class="w"> </span>s3<span class="w"> </span>ls<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>url-shortner
+</code></pre></div>
+<h4 id="configurar-permissoes-iam">Configurar Permissões IAM<a class="headerlink" href="#configurar-permissoes-iam" title="Permanent link">&para;</a></h4>
+<p>Crie uma role IAM com as seguintes permissões:</p>
+<div class="highlight"><span class="filename">lambda-s3-policy.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;Statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;s3:GetObject&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;s3:PutObject&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;arn:aws:s3:::aws-url-shortner-app-SEU-NOME/*&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;logs:CreateLogGroup&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;logs:CreateLogStream&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;logs:PutLogEvents&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;arn:aws:logs:*:*:*&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="3-build-dos-microservicos">3. Build dos Microserviços<a class="headerlink" href="#3-build-dos-microservicos" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Create URL Service</label><label for="__tabbed_2_2">Redirect Service</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>create-url-service
+mvn<span class="w"> </span>clean<span class="w"> </span>compile
+mvn<span class="w"> </span>package
+
+<span class="c1"># JAR será gerado em target/CreateUrlLambda-1.0-SNAPSHOT.jar</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>redirect-url-service
+mvn<span class="w"> </span>clean<span class="w"> </span>compile
+mvn<span class="w"> </span>package
+
+<span class="c1"># JAR será gerado em target/RedirectUrlShortner-1.0-SNAPSHOT.jar</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="deploy-na-aws">Deploy na AWS<a class="headerlink" href="#deploy-na-aws" title="Permanent link">&para;</a></h2>
+<h3 id="1-deploy-das-funcoes-lambda">1. Deploy das Funções Lambda<a class="headerlink" href="#1-deploy-das-funcoes-lambda" title="Permanent link">&para;</a></h3>
+<h4 id="create-url-lambda">Create URL Lambda<a class="headerlink" href="#create-url-lambda" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p><strong>Acessar AWS Lambda Console</strong></p>
+</li>
+<li>
+<p><strong>Criar Nova Função</strong></p>
+<ul>
+<li>Nome: <code>url-shortener-create</code></li>
+<li>Runtime: <code>Java 17</code></li>
+<li>Arquitetura: <code>x86_64</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Upload do Código</strong></p>
+<ul>
+<li>Fazer upload do JAR: <code>CreateUrlLambda-1.0-SNAPSHOT.jar</code></li>
+<li>Handler: <code>com.rocketseat.createUrlShortner.Main::handleRequest</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Configurações</strong></p>
+<ul>
+<li>Timeout: <code>30 segundos</code></li>
+<li>Memória: <code>256 MB</code></li>
+<li>Variáveis de ambiente (se necessário)</li>
+</ul>
+</li>
+</ol>
+<h4 id="redirect-url-lambda">Redirect URL Lambda<a class="headerlink" href="#redirect-url-lambda" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p><strong>Criar Nova Função</strong></p>
+<ul>
+<li>Nome: <code>url-shortener-redirect</code></li>
+<li>Runtime: <code>Java 17</code></li>
+<li>Arquitetura: <code>x86_64</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Upload do Código</strong></p>
+<ul>
+<li>Fazer upload do JAR: <code>RedirectUrlShortner-1.0-SNAPSHOT.jar</code></li>
+<li>Handler: <code>com.rocketseat.redirectUrlShortner.Main::handleRequest</code>  </li>
+</ul>
+</li>
+</ol>
+<h3 id="2-configurar-api-gateway">2. Configurar API Gateway<a class="headerlink" href="#2-configurar-api-gateway" title="Permanent link">&para;</a></h3>
+<h4 id="criar-api-rest">Criar API REST<a class="headerlink" href="#criar-api-rest" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Usando AWS CLI</span>
+aws<span class="w"> </span>apigateway<span class="w"> </span>create-rest-api<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--name<span class="w"> </span>url-shortener-api<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--description<span class="w"> </span><span class="s2">&quot;API para sistema de encurtamento de URLs&quot;</span>
+</code></pre></div>
+<h4 id="configurar-rotas">Configurar Rotas<a class="headerlink" href="#configurar-rotas" title="Permanent link">&para;</a></h4>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Rota CREATE</label><label for="__tabbed_3_2">Rota REDIRECT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li><strong>Método</strong>: <code>POST</code></li>
+<li><strong>Path</strong>: <code>/create</code></li>
+<li><strong>Integração</strong>: Lambda <code>url-shortener-create</code></li>
+<li><strong>CORS</strong>: Habilitado</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Método</strong>: <code>GET</code></li>
+<li><strong>Path</strong>: <code>/{code}</code></li>
+<li><strong>Integração</strong>: Lambda <code>url-shortener-redirect</code></li>
+<li><strong>CORS</strong>: Habilitado</li>
+</ul>
+</div>
+</div>
+</div>
+<h3 id="3-deploy-da-api">3. Deploy da API<a class="headerlink" href="#3-deploy-da-api" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Fazer deploy da API</span>
+aws<span class="w"> </span>apigateway<span class="w"> </span>create-deployment<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--rest-api-id<span class="w"> </span>SEU-API-ID<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--stage-name<span class="w"> </span>prod
+</code></pre></div>
+<h2 id="testando-o-sistema">Testando o Sistema<a class="headerlink" href="#testando-o-sistema" title="Permanent link">&para;</a></h2>
+<h3 id="1-criar-url-encurtada">1. Criar URL Encurtada<a class="headerlink" href="#1-criar-url-encurtada" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Substitua pela sua URL da API</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">API_URL</span><span class="o">=</span><span class="s2">&quot;https://sua-api-id.execute-api.us-east-1.amazonaws.com/prod&quot;</span>
+
+<span class="c1"># Criar URL encurtada</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="nv">$API_URL</span>/create<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;originalUrl&quot;: &quot;https://github.com/seu-usuario/url-shortener-system&quot;,</span>
+<span class="s1">    &quot;expirationTime&quot;: &quot;1735689600&quot;</span>
+<span class="s1">  }&#39;</span>
+</code></pre></div>
+<p><strong>Resposta esperada:</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="2-testar-redirecionamento">2. Testar Redirecionamento<a class="headerlink" href="#2-testar-redirecionamento" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Testar redirecionamento</span>
+curl<span class="w"> </span>-I<span class="w"> </span><span class="nv">$API_URL</span>/a1b2c3d4
+</code></pre></div>
+<p><strong>Resposta esperada:</strong>
+<div class="highlight"><pre><span></span><code><span class="kr">HTTP</span><span class="o">/</span><span class="m">2</span> <span class="m">302</span> 
+<span class="na">location</span><span class="o">:</span> <span class="l">https://github.com/seu-usuario/url-shortener-system</span>
+</code></pre></div></p>
+<h2 id="resolucao-de-problemas-comuns">Resolução de Problemas Comuns<a class="headerlink" href="#resolucao-de-problemas-comuns" title="Permanent link">&para;</a></h2>
+<h3 id="lambda-nao-esta-executando">Lambda não está executando<a class="headerlink" href="#lambda-nao-esta-executando" title="Permanent link">&para;</a></h3>
+<div class="admonition bug">
+<p class="admonition-title">Erro: Timeout ou erro de permissão</p>
+<p><strong>Solução:</strong></p>
+<ol>
+<li>Verificar se a role IAM tem as permissões corretas</li>
+<li>Aumentar timeout da função (máximo 15 minutos)</li>
+<li>Verificar logs no CloudWatch</li>
+</ol>
+</div>
+<h3 id="bucket-s3-nao-encontrado">Bucket S3 não encontrado<a class="headerlink" href="#bucket-s3-nao-encontrado" title="Permanent link">&para;</a></h3>
+<div class="admonition bug">
+<p class="admonition-title">Erro: NoSuchBucket</p>
+<p><strong>Solução:</strong></p>
+<ol>
+<li>Verificar se o nome do bucket no código coincide com o criado</li>
+<li>Verificar se o bucket está na mesma região da Lambda</li>
+<li>Confirmar se o bucket foi criado com sucesso</li>
+</ol>
+</div>
+<h3 id="api-gateway-retorna-erro-500">API Gateway retorna erro 500<a class="headerlink" href="#api-gateway-retorna-erro-500" title="Permanent link">&para;</a></h3>
+<div class="admonition bug">
+<p class="admonition-title">Erro: Internal Server Error</p>
+<p><strong>Solução:</strong></p>
+<ol>
+<li>Verificar logs da Lambda no CloudWatch</li>
+<li>Confirmar se o handler está correto</li>
+<li>Testar a Lambda diretamente (sem API Gateway)</li>
+</ol>
+</div>
+<h2 id="monitoramento">Monitoramento<a class="headerlink" href="#monitoramento" title="Permanent link">&para;</a></h2>
+<h3 id="cloudwatch-logs">CloudWatch Logs<a class="headerlink" href="#cloudwatch-logs" title="Permanent link">&para;</a></h3>
+<p>Acesse os logs das suas funções em: </p>
+<ul>
+<li><strong>Create URL</strong>: <code>/aws/lambda/url-shortener-create</code>  </li>
+<li><strong>Redirect URL</strong>: <code>/aws/lambda/url-shortener-redirect</code>  </li>
+</ul>
+<p>Métricas Importantes:</p>
+<ul>
+<li><strong>Invocations</strong>: Número de execuções</li>
+<li><strong>Duration</strong>: Tempo de execução</li>
+<li><strong>Errors</strong>: Número de erros</li>
+<li><strong>Throttles</strong>: Execuções limitadas</li>
+</ul>
+<h2 id="proximos-passos">Próximos Passos<a class="headerlink" href="#proximos-passos" title="Permanent link">&para;</a></h2>
+<p>Agora que o sistema está funcionando, você pode:</p>
+<ol>
+<li><strong>Explorar a <a href="../architecture/">Arquitetura</a></strong> - Entender como tudo funciona</li>
+<li><strong>Consultar a <a href="../api/create-url/">API Reference</a></strong> - Documentação completa das APIs</li>
+<li><strong>Configurar <a href="../advanced/monitoring/">Monitoramento</a></strong> - Logs e alertas avançados</li>
+</ol>
+<hr />
+<div class="admonition success">
+<p class="admonition-title">Parabéns!</p>
+<p>Seu URL Shortener System está funcionando! Agora você tem um sistema serverless completo rodando na AWS.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Anterior: Início">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Início
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../architecture/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Arquitetura">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Próximo
+              </span>
+              <div class="md-ellipsis">
+                Arquitetura
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Alan-oliveir" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/alan-ogoncalves" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5m282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.sections", "navigation.expand", "navigation.instant", "navigation.tracking", "navigation.footer", "navigation.indexes", "navigation.path", "navigation.prune", "toc.integrate", "toc.follow", "toc.sticky", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest", "search.highlight", "search.share", "header.autohide", "announce.dismiss"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
