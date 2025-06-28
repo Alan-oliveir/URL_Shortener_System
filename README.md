@@ -179,6 +179,10 @@ mvn clean package
 
 ---
 
+## Documentação
+
+**[Documentação Técnica](https://alan-oliveir.github.io/URL_Shortener_System/)** - Detalhes de implementação e arquitetura
+
 ## Licença
 
 Este projeto está sob a licença MIT. Consulte os arquivos LICENSE em cada subprojeto para mais detalhes.
